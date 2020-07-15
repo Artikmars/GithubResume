@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">GitHubResume</string>
+    <string name="main_search">Search</string>
+    <string name="main_profile_name_hint">Enter Github name</string>
+    <string name="main_user_does_not_exist_error">User with given username doesn\'t exist</string>
+    <string name="main_internet_is_missing_error">No Internet connection</string>
+
+    <string name="content_desc_github_profile_image">Github profile image</string>
+
+    <string name="github_profile_description">On GitHub since %1$s, %2$s is a developer based in %3$s with %4$d public repositories and %5$d followers.</string>
 </resources>

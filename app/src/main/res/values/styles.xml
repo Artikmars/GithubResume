@@ -7,4 +7,19 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="MainTextViewStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="MainHeadlineTextViewStyle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="MainBlogTextViewStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorGreen</item>
+    </style>
+
 </resources>
