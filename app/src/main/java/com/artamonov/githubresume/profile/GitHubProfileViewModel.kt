@@ -59,7 +59,7 @@ class GitHubProfileViewModel @Inject constructor(
         )
     }
 
-    private fun mapProfile(user: GitHubProfileJson): GithubProfile {
+    fun mapProfile(user: GitHubProfileJson): GithubProfile {
         return GithubProfile(
             user.avatar_url, user.blog, user.created_at.take(4), user.location,
             user.name ?: user.login, user.public_repos, user.followers, user.following, user.message

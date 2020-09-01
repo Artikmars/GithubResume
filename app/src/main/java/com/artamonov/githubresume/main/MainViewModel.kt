@@ -9,6 +9,7 @@ import com.artamonov.githubresume.main.models.MainViewState
 import com.artamonov.githubresume.utils.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
 import retrofit2.HttpException
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
@@ -40,6 +41,7 @@ class MainViewModel @Inject constructor(
 
     private fun getUser() {
         compositeDisposable.add(interactor.getUserInfo(enteredUsername!!)
+            .delay(300, TimeUnit.MILLISECONDS)
             .subscribeOn(schedulerProvider.getIOThreadScheduler())
             .observeOn(schedulerProvider.getMainThreadScheduler())
             .doOnSubscribe { viewAction = MainAction.ShowProgress }
