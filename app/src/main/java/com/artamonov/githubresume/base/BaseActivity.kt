@@ -4,24 +4,20 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.os.Build
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import dagger.android.AndroidInjection
+import dagger.hilt.android.AndroidEntryPoint
 
-abstract class BaseActivity : AppCompatActivity(), BaseView {
+@AndroidEntryPoint
+abstract class BaseActivity : AppCompatActivity() {
 
     private var snackbar: Snackbar? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onResume() {
         super.onResume()
 
-        val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager =
+            this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         connectivityManager.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 it.registerDefaultNetworkCallback(networkCallback)
@@ -32,7 +28,8 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
     override fun onPause() {
         super.onPause()
 
-        val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager =
+            this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         connectivityManager.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 it.unregisterNetworkCallback(networkCallback)
@@ -46,8 +43,10 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
         }
 
         override fun onLost(network: Network) {
-            snackbar = Snackbar.make(findViewById(android.R.id.content), "Internet connection is missing",
-                Snackbar.LENGTH_INDEFINITE)
+            snackbar = Snackbar.make(
+                findViewById(android.R.id.content), "Internet connection is missing",
+                Snackbar.LENGTH_INDEFINITE
+            )
             snackbar?.show()
         }
     }

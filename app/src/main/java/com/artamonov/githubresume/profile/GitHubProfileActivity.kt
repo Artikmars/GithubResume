@@ -2,10 +2,9 @@ package com.artamonov.githubresume.profile
 
 import android.os.Bundle
 import android.text.util.Linkify
-import android.view.View
 import android.view.View.VISIBLE
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.artamonov.githubresume.R
 import com.artamonov.githubresume.base.BaseActivity
 import com.artamonov.githubresume.profile.models.GitHubProfileAction
@@ -13,18 +12,15 @@ import com.artamonov.githubresume.profile.models.GitHubProfileEvent
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_git_hub_profile.*
-import javax.inject.Inject
 
 class GitHubProfileActivity : BaseActivity() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    private lateinit var viewModel: GitHubProfileViewModel
+    private val viewModel: GitHubProfileViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_git_hub_profile)
-        viewModel = ViewModelProvider(this, viewModelFactory)[GitHubProfileViewModel::class.java]
+
         viewModel.viewEffects().observe(this, Observer { bindViewAction(it) })
         viewModel.obtainEvent(GitHubProfileEvent.HandleIntent(intent))
     }
@@ -56,13 +52,4 @@ class GitHubProfileActivity : BaseActivity() {
 
         }
     }
-
-    override fun hideProgress() {
-        github_profile_progress_bar.visibility = View.GONE
-    }
-
-    override fun showProgress() {
-        github_profile_progress_bar.visibility = VISIBLE
-    }
-
 }

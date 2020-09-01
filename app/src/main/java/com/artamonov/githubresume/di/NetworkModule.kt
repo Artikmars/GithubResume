@@ -1,11 +1,11 @@
 package com.artamonov.githubresume.di
 
 import com.artamonov.githubresume.networking.api.API
-import com.artamonov.githubresume.networking.api.ApiHelper
-import com.artamonov.githubresume.networking.api.AppApiHelper
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -16,17 +16,16 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
+@InstallIn(ApplicationComponent::class)
 class NetworkModule {
 
-    @Provides
-    @Singleton
-    fun provideApiHelper(appApiHelper: AppApiHelper): ApiHelper = appApiHelper
 
     @Provides
     @Singleton
-    fun providesNetworkService(@Named("DefaultRetrofit") retrofit: Retrofit): API = retrofit.create(
-        API::class.java
-    )
+    internal fun providesNetworkService(@Named("DefaultRetrofit") retrofit: Retrofit): API =
+        retrofit.create(
+            API::class.java
+        )
 
     @Provides
     @Singleton
@@ -45,6 +44,7 @@ class NetworkModule {
             .build()
     }
 
+
     @Provides
     @Singleton
     internal fun provideOkHttp(): OkHttpClient {
@@ -57,4 +57,5 @@ class NetworkModule {
             .writeTimeout(20, TimeUnit.SECONDS)
         return okHttpClientBuilder.build()
     }
+
 }

@@ -1,5 +1,6 @@
 package com.artamonov.githubresume.profile
 
+import androidx.hilt.lifecycle.ViewModelInject
 import com.artamonov.githubresume.base.BaseViewModel
 import com.artamonov.githubresume.main.MainActivity.Companion.USERNAME
 import com.artamonov.githubresume.main.interactor.MainInteractorImpl
@@ -11,9 +12,8 @@ import com.artamonov.githubresume.profile.models.GitHubProfileEvent
 import com.artamonov.githubresume.profile.models.GitHubProfileViewState
 import com.artamonov.githubresume.utils.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
-import javax.inject.Inject
 
-class GitHubProfileViewModel @Inject constructor(
+class GitHubProfileViewModel @ViewModelInject constructor(
     var interactor: MainInteractorImpl,
     private var compositeDisposable: CompositeDisposable,
     private var schedulerProvider: SchedulerProvider

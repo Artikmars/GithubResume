@@ -1,5 +1,6 @@
 package com.artamonov.githubresume.main
 
+import androidx.hilt.lifecycle.ViewModelInject
 import com.artamonov.githubresume.base.BaseViewModel
 import com.artamonov.githubresume.main.interactor.MainInteractorImpl
 import com.artamonov.githubresume.main.models.FetchMainStatus
@@ -10,9 +11,8 @@ import com.artamonov.githubresume.utils.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
 import retrofit2.HttpException
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
-class MainViewModel @Inject constructor(
+class MainViewModel @ViewModelInject constructor(
     private var interactor: MainInteractorImpl,
     private var compositeDisposable: CompositeDisposable,
     private var schedulerProvider: SchedulerProvider
